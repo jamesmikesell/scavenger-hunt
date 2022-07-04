@@ -108,7 +108,7 @@ export class CompassComponent implements OnInit, OnDestroy {
     // Convert radians to degrees
     compassHeading *= 180 / Math.PI;
 
-    return compassHeading;
+    return 360 - compassHeading;
 
   }
 
