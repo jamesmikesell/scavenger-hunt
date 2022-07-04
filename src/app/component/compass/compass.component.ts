@@ -12,7 +12,6 @@ import { takeUntil } from 'rxjs/operators';
 export class CompassComponent implements OnInit, OnDestroy {
   private destroy = new Subject<void>();
 
-  degrees = -90;
   compassSize = 24;
 
   latitude = 0;
@@ -23,6 +22,7 @@ export class CompassComponent implements OnInit, OnDestroy {
   destination: Location = { lat: 0, lon: 0 };
   beta: number = 0;
   gama: number = 0;
+  calculatedHeading: number = 0;
 
 
   constructor(
@@ -67,8 +67,52 @@ export class CompassComponent implements OnInit, OnDestroy {
     this.currentHeading = Math.abs(event.alpha || 0);
     this.beta = Math.abs(event.beta || 0);
     this.gama = Math.abs(event.gamma || 0);
+    this.calculatedHeading = this.compassHeading(event.alpha || 0, event.beta || 0, event.gamma || 0);
     this.calculateHeading();
   }
+
+
+
+  private compassHeading(alpha: number, beta: number, gamma: number): number {
+
+    // Convert degrees to radians
+    var alphaRad = alpha * (Math.PI / 180);
+    var betaRad = beta * (Math.PI / 180);
+    var gammaRad = gamma * (Math.PI / 180);
+
+    // Calculate equation components
+    var cA = Math.cos(alphaRad);
+    var sA = Math.sin(alphaRad);
+    var cB = Math.cos(betaRad);
+    var sB = Math.sin(betaRad);
+    var cG = Math.cos(gammaRad);
+    var sG = Math.sin(gammaRad);
+
+    // Calculate A, B, C rotation components
+    var rA = - cA * sG - sA * sB * cG;
+    var rB = - sA * sG + cA * sB * cG;
+    var rC = - cB * cG;
+
+    // Calculate compass heading
+    var compassHeading = Math.atan(rA / rB);
+
+    // Convert from half unit circle to whole unit circle
+    if (rB < 0) {
+      compassHeading += Math.PI;
+    } else if (rA < 0) {
+      compassHeading += 2 * Math.PI;
+    }
+
+    // Convert radians to degrees
+    compassHeading *= 180 / Math.PI;
+
+    return compassHeading;
+
+  }
+
+
+
+
 
   private calculateHeading(): void {
     const currentLocation = { lat: this.latitude, lon: this.longitude };
@@ -76,8 +120,6 @@ export class CompassComponent implements OnInit, OnDestroy {
     let toDestination = headingDistanceTo(currentLocation, this.destination);
     this.headingToDestination = toDestination.heading;
     this.distanceToDestination = toDestination.distance;
-
-    this.degrees = this.currentHeading;
   }
 
 }

@@ -1,6 +1,7 @@
-magnetic: {{degrees.toFixed(1)}} <br>
+magnetic: {{currentHeading.toFixed(1)}} <br>
 beta: {{beta.toFixed(1)}} <br>
 gama: {{gama.toFixed(1)}} <br>
+gama: {{calculatedHeading.toFixed(1)}} <br>
 heading: {{headingToDestination.toFixed(1)}} <br>
 distance: {{distanceToDestination.toFixed(1)}} <br>
 
@@ -10,7 +11,16 @@ distance: {{distanceToDestination.toFixed(1)}} <br>
 <div class="compass-div">
   <!-- [style.margin-left]="leftMargin" -->
   <svg xmlns="http://www.w3.org/2000/svg" [style.width]="compassSize" [style.height]="compassSize"
-    [style.transform]="'rotate(' + (degrees + headingToDestination - 90) + 'deg)'" viewBox="0 0 24 24">
+    [style.transform]="'rotate(' + (currentHeading + headingToDestination - 90) + 'deg)'" viewBox="0 0 24 24">
+    <path d="M24 12l-9-9v7h-15v4h15v7z" />
+    <!-- <path d="M6.185 4.843l11.927 7.157-11.927 7.157 2.982-7.157-2.982-7.157zm-4.185-4.843l5 12-5 12 20-12-20-12z" /> -->
+  </svg>
+</div>
+
+<div class="compass-div">
+  <!-- [style.margin-left]="leftMargin" -->
+  <svg xmlns="http://www.w3.org/2000/svg" [style.width]="compassSize" [style.height]="compassSize"
+    [style.transform]="'rotate(' + (calculatedHeading + headingToDestination - 90) + 'deg)'" viewBox="0 0 24 24">
     <path d="M24 12l-9-9v7h-15v4h15v7z" />
     <!-- <path d="M6.185 4.843l11.927 7.157-11.927 7.157 2.982-7.157-2.982-7.157zm-4.185-4.843l5 12-5 12 20-12-20-12z" /> -->
   </svg>
