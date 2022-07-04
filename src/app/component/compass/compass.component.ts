@@ -17,7 +17,7 @@ export class CompassComponent implements OnInit, OnDestroy {
 
   latitude = 0;
   longitude = 0;
-  currentHeading = 0;
+  alpha = 0;
   headingToDestination = 0;
   distanceToDestination = 0
   destination: Location = { lat: 0, lon: 0 };
@@ -67,7 +67,7 @@ export class CompassComponent implements OnInit, OnDestroy {
   // @HostListener('window:deviceorientation', ['$event'])
   @HostListener('window:deviceorientationabsolute', ['$event'])
   orientationAndroid(event: DeviceOrientationEvent): void {
-    this.currentHeading = Math.abs(event.alpha || 0);
+    this.alpha = Math.abs(event.alpha || 0);
     this.beta = Math.abs(event.beta || 0);
     this.gama = Math.abs(event.gamma || 0);
     this.triAxisHeading = this.compassHeading(event.alpha || 0, event.beta || 0, event.gamma || 0);
@@ -129,7 +129,7 @@ export class CompassComponent implements OnInit, OnDestroy {
 
     //Only us triAxis heading if the screen is tilted up closer to vertical
     if (this.beta < 30) {
-      this.arrowAngle = this.currentHeading + this.headingToDestination + this.declination;
+      this.arrowAngle = this.alpha + this.headingToDestination + this.declination;
     } else {
       this.arrowAngle = this.triAxisHeading + this.headingToDestination + this.declination;
     }
