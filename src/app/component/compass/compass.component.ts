@@ -13,7 +13,7 @@ import { field } from 'geomag';
 export class CompassComponent implements OnInit, OnDestroy {
   private destroy = new Subject<void>();
 
-  compassSize = 24;
+  screenMinSize = 24;
   title = "";
   latitude = 0;
   longitude = 0;
@@ -38,7 +38,7 @@ export class CompassComponent implements OnInit, OnDestroy {
     navigator.geolocation.watchPosition((data) => this.locationChange(data), null, { enableHighAccuracy: true });
 
     let minSize = Math.min(window.innerWidth, window.innerHeight);
-    this.compassSize = minSize * .7;
+    this.screenMinSize = minSize;
 
     this.route.queryParams
       .pipe(takeUntil(this.destroy))

@@ -14,9 +14,8 @@
 </div>
 
 <div class="compass-div">
-  <svg xmlns="http://www.w3.org/2000/svg" [style.width]="compassSize" [style.height]="compassSize"
-    [style.transform]="'rotate(' + (arrowAngle - 90) + 'deg)'" viewBox="0 0 24 24">
-    <path d="M24 12l-9-9v7h-15v4h15v7z" />
-  </svg>
+  <mat-icon class="arrow-icon" [style.transform]="'rotate(' + (arrowAngle) + 'deg)'"
+    [style.font-size]="screenMinSize + 'px'">
+    arrow_circle_up
+  </mat-icon>
 </div>
-
