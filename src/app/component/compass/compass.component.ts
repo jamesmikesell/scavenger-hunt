@@ -94,7 +94,7 @@ export class CompassComponent implements OnInit, OnDestroy {
     // Calculate A, B, C rotation components
     var rA = - cA * sG - sA * sB * cG;
     var rB = - sA * sG + cA * sB * cG;
-    var rC = - cB * cG;
+    // var rC = - cB * cG;
 
     // Calculate compass heading
     var compassHeading = Math.atan(rA / rB);
