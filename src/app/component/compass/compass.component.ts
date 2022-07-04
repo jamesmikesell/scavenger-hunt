@@ -26,6 +26,7 @@ export class CompassComponent implements OnInit, OnDestroy {
   triAxisHeading: number = 0;
   declination: number = 0;
   arrowAngle = 0;
+  debug = false;
 
 
   constructor(
@@ -48,6 +49,8 @@ export class CompassComponent implements OnInit, OnDestroy {
           lat: +params.lat,
           lon: +params.lon
         };
+
+        this.debug = !!params.debug;
       });
   }
 
@@ -140,6 +143,7 @@ export class CompassComponent implements OnInit, OnDestroy {
 interface LocationParams {
   lat: number | string;
   lon: number | string;
+  debug: string;
 }
 
 interface Location {
