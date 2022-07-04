@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { AppVersion } from './app-version';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'scavenger-hunt';
 
   getVersion(): string {
-    return environment.version;
+    return AppVersion.VERSION;
   }
 
 }

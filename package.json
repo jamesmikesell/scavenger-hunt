@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "node ./build/build-pre.js && rm -rf docs && rm -rf dist && ng build --base-href \"/scavenger-hunt/\" && mv dist/scavenger-hunt docs",
+    "build": "ng build --base-href \"/scavenger-hunt/\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
