@@ -14,7 +14,7 @@ export class CompassComponent implements OnInit, OnDestroy {
   private destroy = new Subject<void>();
 
   compassSize = 24;
-
+  title = "";
   latitude = 0;
   longitude = 0;
   alpha = 0;
@@ -50,6 +50,7 @@ export class CompassComponent implements OnInit, OnDestroy {
           lon: +params.lon
         };
 
+        this.title = params.title;
         this.debug = !!params.debug;
       });
   }
@@ -144,6 +145,7 @@ interface LocationParams {
   lat: number | string;
   lon: number | string;
   debug: string;
+  title: string;
 }
 
 interface Location {

@@ -1,0 +1,12 @@
+<div *ngIf="!showNextPointMessage">
+  <app-compass></app-compass>
+
+  <button type="button" [disabled]="disableCameraButton" (click)="toggleCamera()">Camera</button>
+
+  <zxing-scanner *ngIf="displayCamera" (scanSuccess)="scanSuccess($event)"></zxing-scanner>
+</div>
+<div *ngIf="showNextPointMessage" class="congrats">
+  <h1>Congratulations!</h1>
+  <h1>Now</h1>
+  <h1>Find The Next Clue...</h1>
+</div>

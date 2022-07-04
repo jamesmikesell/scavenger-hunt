@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Result } from '@zxing/library';
 import { AppVersion } from './app-version';
 
 @Component({
