@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { headingDistanceTo } from 'geolocation-utils';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { field } from 'geomag';
 
 @Component({
   selector: 'app-compass',
@@ -23,6 +24,7 @@ export class CompassComponent implements OnInit, OnDestroy {
   beta: number = 0;
   gama: number = 0;
   calculatedHeading: number = 0;
+  declination: number = 0;
 
 
   constructor(
@@ -120,6 +122,9 @@ export class CompassComponent implements OnInit, OnDestroy {
     let toDestination = headingDistanceTo(currentLocation, this.destination);
     this.headingToDestination = toDestination.heading;
     this.distanceToDestination = toDestination.distance;
+
+
+    this.declination = field(this.latitude, this.longitude).declination;
   }
 
 }
