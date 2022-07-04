@@ -21,6 +21,8 @@ export class CompassComponent implements OnInit, OnDestroy {
   headingToDestination = 0;
   distanceToDestination = 0
   destination: Location = { lat: 0, lon: 0 };
+  beta: number = 0;
+  gama: number = 0;
 
 
   constructor(
@@ -63,6 +65,8 @@ export class CompassComponent implements OnInit, OnDestroy {
   @HostListener('window:deviceorientationabsolute', ['$event'])
   orientationAndroid(event: DeviceOrientationEvent): void {
     this.currentHeading = Math.abs(event.alpha || 0);
+    this.beta = Math.abs(event.beta || 0);
+    this.gama = Math.abs(event.gamma || 0);
     this.calculateHeading();
   }
 
