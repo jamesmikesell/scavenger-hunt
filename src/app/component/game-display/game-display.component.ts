@@ -10,7 +10,6 @@ import { WakeLockService } from 'src/app/service/wake-lock.service';
 export class GameDisplayComponent implements OnInit {
 
   displayCamera = false;
-  disableCameraButton = false;
   screenAwake = false;
   showNextPointMessage = false;
 
@@ -26,13 +25,6 @@ export class GameDisplayComponent implements OnInit {
   }
 
   toggleCamera(): void {
-    this.disableCameraButton = true;
-    if (!this.displayCamera) {
-      setTimeout(() => {
-        this.disableCameraButton = false;
-      }, 5000);
-    }
-
     this.displayCamera = !this.displayCamera;
   }
 

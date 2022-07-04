@@ -1,9 +1,16 @@
 <div *ngIf="!showNextPointMessage">
-  <app-compass></app-compass>
+  <app-compass *ngIf="!displayCamera"></app-compass>
 
-  <button type="button" [disabled]="disableCameraButton" (click)="toggleCamera()">Camera</button>
+  <div *ngIf="displayCamera" class="camera">
+    <zxing-scanner (scanSuccess)="scanSuccess($event)"></zxing-scanner>
+  </div>
 
-  <zxing-scanner *ngIf="displayCamera" (scanSuccess)="scanSuccess($event)"></zxing-scanner>
+  <div class="camera-button">
+    <button mat-fab color="primary" type="button" (click)="toggleCamera()">
+      <mat-icon>{{!displayCamera ? 'photo_camera' : 'hide_source'}}</mat-icon>
+    </button>
+  </div>
+
 </div>
 <div *ngIf="showNextPointMessage" class="congrats">
   <h1>Congratulations!</h1>

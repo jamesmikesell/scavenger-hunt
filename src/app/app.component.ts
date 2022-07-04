@@ -9,9 +9,7 @@ import { AppVersion } from './app-version';
 })
 export class AppComponent {
   title = 'scavenger-hunt';
+  AppVersion = AppVersion;
 
-  getVersion(): string {
-    return AppVersion.VERSION;
-  }
 
 }
