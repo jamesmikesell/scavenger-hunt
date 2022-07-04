@@ -23,8 +23,9 @@ export class CompassComponent implements OnInit, OnDestroy {
   destination: Location = { lat: 0, lon: 0 };
   beta: number = 0;
   gama: number = 0;
-  calculatedHeading: number = 0;
+  triAxisHeading: number = 0;
   declination: number = 0;
+  arrowAngle = 0;
 
 
   constructor(
@@ -69,7 +70,7 @@ export class CompassComponent implements OnInit, OnDestroy {
     this.currentHeading = Math.abs(event.alpha || 0);
     this.beta = Math.abs(event.beta || 0);
     this.gama = Math.abs(event.gamma || 0);
-    this.calculatedHeading = this.compassHeading(event.alpha || 0, event.beta || 0, event.gamma || 0);
+    this.triAxisHeading = this.compassHeading(event.alpha || 0, event.beta || 0, event.gamma || 0);
     this.calculateHeading();
   }
 
@@ -125,6 +126,13 @@ export class CompassComponent implements OnInit, OnDestroy {
 
 
     this.declination = field(this.latitude, this.longitude).declination;
+
+    //Only us triAxis heading if the screen is tilted up closer to vertical
+    if (this.beta < 30) {
+      this.arrowAngle = this.currentHeading + this.headingToDestination + this.declination;
+    } else {
+      this.arrowAngle = this.triAxisHeading + this.headingToDestination + this.declination;
+    }
   }
 
 }
